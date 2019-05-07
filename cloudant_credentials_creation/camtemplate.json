@@ -1,0 +1,14 @@
+{
+   "name": "Cloudant credentials creation v2",
+   "description": "Cloudant credentials creation",
+   "type": "userCreated",
+   "manifest": {
+     "template_type": "Terraform",
+     "template_format": "HCL",
+     "template_provider": "Other"
+   },
+   "metadata": {
+     "displayName": "Cloudant credentials creation v2",
+     "bullets": []
+   }
+ }

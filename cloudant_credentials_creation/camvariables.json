@@ -1,0 +1,188 @@
+{
+  "input_datatypes": [ ],
+  "input_namespaces": [ ],
+  "output_namespace": "",
+  "input_groups": [  {
+    "name": "input_group",
+    "label": "input group"
+  } ],
+  "output_groups": [ ],
+  "template_input_params": [
+    {
+      "name": "vm_address",
+      "label": "vm_address ",
+      "description": "VM address",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "input_group",
+      "required": false,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ssh_user",
+      "label": "ssh_user ",
+      "description": "ssh user name",
+      "type": "string",
+      "default": "root",
+      "validation": "",
+      "group_name": "input_group",
+      "required": false,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "ssh_user_password",
+      "label": "ssh_user_password ",
+      "description": "ssh user password",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "input_group",
+      "required": false,
+      "secured": true,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "bluemix_key",
+      "label": "Bluemix Key",
+      "description": "The user password for ssh connection, which is default in template",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "service_name",
+      "label": "Service Name",
+      "description": "Cloudant service name",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    },
+    {
+      "name": "service_credentials_name",
+      "label": "Service Credentials Name",
+      "description": "The Service Key name",
+      "type": "string",
+      "default": "",
+      "validation": "",
+      "group_name": "",
+      "required": true,
+      "secured": false,
+      "hidden": false,
+      "immutable": false,
+      "immutable_after_create": false
+    }
+  ],
+  "template_output_params": [
+    {
+      "name": "apikey",
+      "label": "Apikey",
+      "description": "Apikey",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "host",
+      "label": "Host",
+      "description": "Host",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "iam_apikey_description",
+      "label": "Iam Apikey Description",
+      "description": "Iam Apikey Description",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "iam_apikey_name",
+      "label": "Iam Apikey Name",
+      "description": "Iam Apikey Name",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "iam_serviceid_crn",
+      "label": "Iam Serviceid Crn",
+      "description": "Iam Serviceid Crn",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "password",
+      "label": "Password",
+      "description": "Password",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "port",
+      "label": "Port",
+      "description": "Port",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "url",
+      "label": "Url",
+      "description": "Url",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    },
+    {
+      "name": "username",
+      "label": "Username",
+      "description": "Username",
+      "group_name": "",
+      "secured": false,
+      "hidden": false,
+      "shortname": "",
+      "type": "string"
+    }
+  ]
+}
