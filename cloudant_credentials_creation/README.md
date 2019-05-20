@@ -1,8 +1,6 @@
 ## Cloudant credentials creation
 
-Created on 4/9/19 by Agostino for Cloudant credentials creation
+Created on 5/7/19 by Agostino/Radu for Cloudant credentials creation
 
 
-## Design Decisions
-| Design item                | Decision|
-| :----------------------------------- | :--------------------------------------------------------------------------------|
+

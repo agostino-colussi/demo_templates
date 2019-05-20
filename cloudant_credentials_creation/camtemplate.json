@@ -1,5 +1,5 @@
 {
-   "name": "Cloudant credentials creation v2",
+   "name": "Cloudant credentials creation",
    "description": "Cloudant credentials creation",
    "type": "userCreated",
    "manifest": {
@@ -8,7 +8,7 @@
      "template_provider": "Other"
    },
    "metadata": {
-     "displayName": "Cloudant credentials creation v2",
+     "displayName": "Cloudant credentials creation",
      "bullets": []
    }
 }
