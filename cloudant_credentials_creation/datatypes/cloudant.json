@@ -1,0 +1,106 @@
+{
+    "name": "cloudant",
+    "label": "Cloudant",
+    "description": "Data structure describing the IBM Cloudant service",
+    "attributes": [
+        {
+            "name": "apikey",
+            "type": "string",
+            "description": "apikey",
+            "label": "apikey",
+            "required": false,
+            "secured": true,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "host",
+            "type": "string",
+            "description": "host",
+            "label": "host",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "iam_apikey_description",
+            "type": "string",
+            "description": "iam_apikey_description",
+            "label": "iam_apikey_description",
+            "required": false,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "iam_apikey_name",
+            "type": "string",
+            "description": "iam_apikey_name",
+            "label": "iam_apikey_name",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "iam_serviceid_crn",
+            "type": "string",
+            "description": "iam_serviceid_crn",
+            "label": "iam_serviceid_crn",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "description": "password",
+            "label": "password",
+            "required": true,
+            "secured": true,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "port",
+            "type": "string",
+            "description": "port",
+            "label": "port",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "url",
+            "type": "string",
+            "description": "url",
+            "label": "url",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        },
+        {
+            "name": "username",
+            "type": "string",
+            "description": "username",
+            "label": "username",
+            "required": true,
+            "secured": false,
+            "immutable": false,
+            "hidden": false,
+            "options": null
+        }
+    ]
+}

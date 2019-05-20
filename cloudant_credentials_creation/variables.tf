@@ -19,7 +19,7 @@ variable "ssh_user_password" {
 }
 
 variable "bluemix_key" {
-  description = "The user password for ssh connection, which is default in template"
+  description = "The IBM Cloud key to access Cloud"
 }
 
 variable "service_name" {
