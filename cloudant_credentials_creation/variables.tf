@@ -22,8 +22,8 @@ variable "bluemix_key" {
   description = "The IBM Cloud key to access Cloud"
 }
 
-variable "service_name" {
-  description = "Cloudant service name"
+variable "service_instance_name" {
+  description = "Cloudant service instance name"
 }
 
 variable "service_credentials_name" {

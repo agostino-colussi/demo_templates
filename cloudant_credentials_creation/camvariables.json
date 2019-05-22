@@ -110,9 +110,9 @@
       "immutable_after_create": false
     },
     {
-      "name": "service_name",
-      "label": "Service Name",
-      "description": "Cloudant service name",
+      "name": "service_instance_name",
+      "label": "Service Instance Name",
+      "description": "Cloudant service instance name",
       "type": "string",
       "validation": "",
       "group_name": "",

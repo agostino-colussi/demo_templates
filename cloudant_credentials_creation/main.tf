@@ -35,8 +35,8 @@ resource "null_resource" "cloudant" {
     ibmcloud config --check-version=false > /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
     ibmcloud login -a https://cloud.ibm.com -r us-south >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
     ibmcloud target --cf-api https://api.us-south.cf.cloud.ibm.com -o agostino.colussi -s Test >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
-    ibmcloud service key-create ${var.service_name} ${var.service_credentials_name} >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
-    com_response=$(ibmcloud service key-show ${var.service_name} ${var.service_credentials_name})
+    ibmcloud service key-create ${var.service_instance_name} ${var.service_credentials_name} >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
+    com_response=$(ibmcloud service key-show ${var.service_instance_name} ${var.service_credentials_name})
     echo $com_response | awk 'match($0,"{"){print substr($0,RSTART)}' >> /tmp/${random_string.random-dir.result}/com_output
     EOF
         destination = "/tmp/${random_string.random-dir.result}/create_credentials.sh"
@@ -50,7 +50,7 @@ resource "null_resource" "cloudant" {
     ibmcloud config --check-version=false >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
     ibmcloud login -a https://cloud.ibm.com -r us-south >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
     ibmcloud target --cf-api https://api.us-south.cf.cloud.ibm.com -o agostino.colussi -s Test >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
-    ibmcloud service key-delete ${var.service_name} ${var.service_credentials_name} -f >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
+    ibmcloud service key-delete ${var.service_instance_name} ${var.service_credentials_name} -f >> /tmp/${random_string.random-dir.result}/create_cloudant_credentials.log 2>&1
     EOF
         destination = "/tmp/${random_string.random-dir.result}/delete_credentials.sh"
     }
