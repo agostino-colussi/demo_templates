@@ -292,7 +292,7 @@
             "label": "SSH Key Name",
             "customtype": "string",
             "type": "string",
-            "immutable": true,
+            "immutable": false,
             "hidden": false,
             "required": true,
             "secured": false,
@@ -312,6 +312,31 @@
             "description": "SSH Key",
             "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
             "permission": "Read-Only"
+          },
+          {
+            "name": "Topology",
+            "label": "Topology",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Define the topology",
+            "options": [
+              {
+                "label": "Simple",
+                "value": "Simple topology",
+                "default": true
+              },
+              {
+                "label": "Advanced",
+                "value": "Advanced topology",
+                "default": false
+              }
+            ],
+            "permission": "Read-Write",
+            "action": "Provision"
           }
         ],
         "expanded": false,
@@ -361,6 +386,31 @@
             "description": "SSH Key",
             "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
             "permission": "Read-Write"
+          },
+          {
+            "name": "Topology",
+            "label": "Topology",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Define the topology",
+            "options": [
+              {
+                "label": "Simple",
+                "value": "Simple topology",
+                "default": true
+              },
+              {
+                "label": "Advanced",
+                "value": "Advanced topology",
+                "default": false
+              }
+            ],
+            "permission": "Read-Write",
+            "action": "Provision"
           }
         ],
         "expanded": false,
@@ -369,6 +419,6 @@
         "currency": "USD"
       }
     ],
-    "version": "1.0.0.0"
+    "version": "2.0.0.0"
   }
 }
