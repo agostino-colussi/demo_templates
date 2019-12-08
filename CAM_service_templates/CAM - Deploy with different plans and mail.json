@@ -1,0 +1,374 @@
+{
+  "service": {
+    "specVersion": "v3",
+    "catalog_metadata": {
+      "name": "CAM - Deploy with different plans - mail - outputs v1",
+      "description": "Deploy with different plans & mail",
+      "image": "serviceicon_1.svg",
+      "category": "Agostino",
+      "bullets": [
+        {
+          "title": "Cloud Provider",
+          "description": "Amazon AWS"
+        }
+      ],
+      "providerDisplayName": "IBM",
+      "longDescription": "Using Cloud Automation Manager - Deploy on Amazon AWS of different topologies & mail",
+      "documentationUrl": "https://www-03preprod.ibm.com/support/knowledgecenter/SS2L37_3.1.0.2/kc_welcome.html",
+      "supportUrl": "https://www.ibm.com/mysupport/s/topic/0TO500000001o0fGAA/ibm-cloud-private?language=en_US&productId=01t50000004X1PWAA0",
+      "bindable": false,
+      "updatable": "",
+      "author": "camuser2@localtest.com",
+      "systemTags": false
+    },
+    "tags": [],
+    "actions": [
+      {
+        "type": "provision",
+        "name": "Provision",
+        "description": "Default action for deployment of service",
+        "input_parameters": [
+          {
+            "name": "Topology",
+            "label": "Topology",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Define the topology",
+            "options": [
+              {
+                "label": "Simple",
+                "value": "Simple topology",
+                "default": true
+              },
+              {
+                "label": "Advanced",
+                "value": "Advanced topology",
+                "default": false
+              }
+            ],
+            "permission": "Read-Write",
+            "action": "Provision"
+          },
+          {
+            "name": "hostname-tag",
+            "label": "Hostname",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Hostname",
+            "default": "agostino-ec2",
+            "permission": "Read-Write",
+            "action": "Provision"
+          },
+          {
+            "name": "ssh-key-name",
+            "label": "SSH Key Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key Name",
+            "default": "agostino-key",
+            "permission": "Read-Write",
+            "action": "Provision"
+          },
+          {
+            "name": "ssh-key",
+            "label": "SSH Key",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key",
+            "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
+            "permission": "Read-Write",
+            "action": "Provision"
+          }
+        ],
+        "flow": {
+          "conditions": [
+            {
+              "decision": {
+                "title": "decision_57b31e",
+                "options": [
+                  {
+                    "case": "Simple topology",
+                    "sequence": {
+                      "0": "agoamazo574cd16b"
+                    }
+                  },
+                  {
+                    "case": "Advanced topology",
+                    "sequence": {
+                      "0": "agoamazoa970c108",
+                      "1": "agoamazo69422964"
+                    }
+                  }
+                ],
+                "id": "decision6f8091f5",
+                "mapped_parameter": "${input_parameters.Topology}"
+              }
+            }
+          ],
+          "templates": [
+            {
+              "Ago Amazon EC2 Virtual Server with SSH key v2": {
+                "title": "Ago Amazon EC2 Virtual Server with SSH key v2_d3df57",
+                "template_name": "Ago Amazon EC2 Virtual Server with SSH key v2",
+                "version": "master",
+                "id": "agoamazo574cd16b",
+                "template_type": "Terraform",
+                "template_content_type": "Amazon EC2",
+                "template_provider": "Amazon EC2",
+                "instance_name": "",
+                "cloud_connection_name": "AWS_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "hostname-tag": "${input_parameters.hostname-tag}",
+                  "aws_region": "us-east-1",
+                  "vpc_name_tag": "CAMVPC",
+                  "subnet_name": "CAM",
+                  "aws_image_size": "t2.small",
+                  "public_ssh_key_name": "${input_parameters.ssh-key-name}",
+                  "public_ssh_key": "${input_parameters.ssh-key}",
+                  "aws_image": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+                  "aws_ami_owner_id": "099720109477"
+                },
+                "outputs": [
+                  "instance_public_ip"
+                ]
+              }
+            },
+            {
+              "Ago Amazon EC2 Virtual Server with SSH key v2": {
+                "title": "Ago Amazon EC2 Virtual Server with SSH key v2_341f2c",
+                "template_name": "Ago Amazon EC2 Virtual Server with SSH key v2",
+                "version": "master",
+                "id": "agoamazoa970c108",
+                "template_type": "Terraform",
+                "template_content_type": "Amazon EC2",
+                "template_provider": "Amazon EC2",
+                "instance_name": "",
+                "cloud_connection_name": "AWS_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "hostname-tag": "${input_parameters.hostname-tag}-1",
+                  "aws_region": "us-east-1",
+                  "vpc_name_tag": "CAMVPC",
+                  "subnet_name": "CAM",
+                  "aws_image_size": "t2.small",
+                  "public_ssh_key_name": "${input_parameters.ssh-key-name}-1",
+                  "public_ssh_key": "${input_parameters.ssh-key}",
+                  "aws_image": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+                  "aws_ami_owner_id": "099720109477"
+                },
+                "outputs": [
+                  "instance_public_ip"
+                ]
+              }
+            },
+            {
+              "Ago Amazon EC2 Virtual Server with SSH key v2": {
+                "title": "Ago Amazon EC2 Virtual Server with SSH key v2_f8a16e",
+                "template_name": "Ago Amazon EC2 Virtual Server with SSH key v2",
+                "version": "master",
+                "id": "agoamazo69422964",
+                "template_type": "Terraform",
+                "template_content_type": "Amazon EC2",
+                "template_provider": "Amazon EC2",
+                "instance_name": "",
+                "cloud_connection_name": "AWS_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "hostname-tag": "${input_parameters.hostname-tag}-2",
+                  "aws_region": "us-east-1",
+                  "vpc_name_tag": "CAMVPC",
+                  "subnet_name": "CAM",
+                  "aws_image_size": "t2.small",
+                  "public_ssh_key_name": "${input_parameters.ssh-key-name}-2",
+                  "public_ssh_key": "${input_parameters.ssh-key}",
+                  "aws_image": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+                  "aws_ami_owner_id": "099720109477"
+                },
+                "outputs": [
+                  "instance_public_ip"
+                ]
+              }
+            }
+          ],
+          "resthooks": [],
+          "notifications": [
+            {
+              "emailnotification": {
+                "title": "emailnotification_3bdf8a",
+                "type": "email",
+                "receiverList": "agostino.colussi@it.ibm.com",
+                "id": "emailnot7282b549",
+                "sender": "CAMadmin",
+                "copyToList": "",
+                "subject": "Deployment on EC2 results",
+                "body": "Deployment statuses:\n-----------------------------------------\n${templates.agoamazo574cd16b.status || templates.agoamazoa970c108.status}\n${ \"\" || templates.agoamazo69422964.status}\n\nHostnames: \n--------------------------------\n${templates.agoamazo574cd16b.hostname-tag || templates.agoamazoa970c108.hostname-tag}\n${ \"\" || templates.agoamazo69422964.hostname-tag}"
+              }
+            }
+          ],
+          "sequence": {
+            "0": "decision6f8091f5",
+            "1": "emailnot7282b549"
+          },
+          "error_sequence": {}
+        },
+        "output_parameters": [
+          {
+            "name": "vm1_puplic_ip",
+            "label": "vm1_puplic_ip",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "vm1_puplic_ip",
+            "default": "${templates.agoamazo574cd16b.output.public_ip}"
+          },
+          {
+            "name": "vm2_public_ip",
+            "label": "vm2_public_ip",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "vm2_public_ip",
+            "default": "${templates.agoamazoa970c108.output.public_ip}"
+          },
+          {
+            "name": "vm3_public_ip",
+            "label": "vm3_public_ip",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "vm3_public_ip",
+            "default": "${templates.agoamazo69422964.output.public_ip}"
+          }
+        ]
+      }
+    ],
+    "plans": [
+      {
+        "name": "Simple",
+        "description": "Simple Topology",
+        "actions": [],
+        "plan_parameters": [
+          {
+            "name": "hostname-tag",
+            "label": "Hostname",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Hostname",
+            "default": "agostino-ec2",
+            "permission": "Read-Write"
+          },
+          {
+            "name": "ssh-key-name",
+            "label": "SSH Key Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key Name",
+            "default": "agostino-key",
+            "permission": "Read-Only"
+          },
+          {
+            "name": "ssh-key",
+            "label": "SSH Key",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key",
+            "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
+            "permission": "Read-Only"
+          }
+        ],
+        "expanded": false,
+        "last_updated": "2018-11-23T11:59:22.808Z",
+        "version": "1.0",
+        "currency": "USD"
+      },
+      {
+        "name": "Advanced",
+        "description": "Advanced Topology",
+        "plan_parameters": [
+          {
+            "name": "hostname-tag",
+            "label": "Hostname",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Hostname",
+            "default": "agostino-ec2",
+            "permission": "Read-Write"
+          },
+          {
+            "name": "ssh-key-name",
+            "label": "SSH Key Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key Name",
+            "default": "agostino-key",
+            "permission": "Read-Write"
+          },
+          {
+            "name": "ssh-key",
+            "label": "SSH Key",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "SSH Key",
+            "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
+            "permission": "Read-Write"
+          }
+        ],
+        "expanded": false,
+        "last_updated": "2018-11-23T11:59:22.808Z",
+        "version": "1.0",
+        "currency": "USD"
+      }
+    ],
+    "version": "1.0.0.0"
+  }
+}
