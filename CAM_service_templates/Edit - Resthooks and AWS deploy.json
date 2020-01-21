@@ -1,0 +1,334 @@
+{
+  "service": {
+    "specVersion": "v3",
+    "catalog_metadata": {
+      "name": "EDIT - Rest hooks and AWS deploy",
+      "description": "Rest hooks usage",
+      "image": "serviceicon_1.svg",
+      "category": "Agostino",
+      "bullets": [
+        {
+          "title": "Cloud Provider",
+          "description": "VMware NSX-T"
+        }
+      ],
+      "providerDisplayName": "IBM",
+      "longDescription": "Rest hooks usage",
+      "documentationUrl": "",
+      "supportUrl": "",
+      "bindable": true,
+      "updatable": "",
+      "author": "camuser2@localtest.com",
+      "systemTags": false
+    },
+    "tags": [],
+    "actions": [
+      {
+        "type": "provision",
+        "name": "Provision",
+        "description": "Default action for deployment of service",
+        "input_parameters": [
+          {
+            "name": "resthook_input",
+            "label": "Resthook input - Provision",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Input for resthook",
+            "default": "Test",
+            "passbyname": false,
+            "dynamicDetails": {},
+            "isDynamic": false
+          },
+          {
+            "name": "cloud_conn",
+            "label": "Cloud Connection",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "isDynamic": false
+          },
+          {
+            "name": "vpc_name",
+            "label": "VPC Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "default": "myvpc"
+          },
+          {
+            "name": "subnet_name",
+            "label": "Subnet Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "default": "mysubnet"
+          },
+          {
+            "name": "hostname_tag",
+            "label": "Hostname tag",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "default": "agostino-ec2"
+          },
+          {
+            "name": "key_name",
+            "label": "SSH Key Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "default": "agostino-key"
+          },
+          {
+            "name": "ssh_key",
+            "label": "SSH Key value",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com"
+          }
+        ],
+        "flow": {
+          "conditions": [],
+          "templates": [
+            {
+              "Ago Amazon EC2 Virtual Server with SSH key v2": {
+                "title": "Ago Amazon EC2 Virtual Server with SSH key v2_40ff14",
+                "template_name": "Ago Amazon EC2 Virtual Server with SSH key v2",
+                "version": "master",
+                "id": "agoamazo9d9ec813",
+                "template_type": "Terraform",
+                "template_content_type": "Amazon EC2",
+                "template_provider": "Amazon EC2",
+                "instance_name": "",
+                "cloud_connection_name": "${input_parameters.cloud_conn}",
+                "template_data_objects": {},
+                "template_params": {
+                  "hostname-tag": "${input_parameters.hostname_tag}",
+                  "aws_region": "ap-southeast-2",
+                  "vpc_name_tag": "${input_parameters.vpc_name}",
+                  "subnet_name": "${input_parameters.subnet_name}",
+                  "aws_image_size": "t2.small",
+                  "public_ssh_key_name": "${input_parameters.key_name}",
+                  "public_ssh_key": "${input_parameters.ssh_key}",
+                  "aws_image": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+                  "aws_ami_owner_id": "099720109477"
+                },
+                "outputs": [
+                  "public_ip"
+                ],
+                "immutable": false,
+                "provider_engine_version": "0.11.11",
+                "isErrorFlow": false
+              }
+            }
+          ],
+          "resthooks": [
+            {
+              "resthook": {
+                "title": "resthook_168fc0",
+                "id": "resthookee70ad6f",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "https://hooks.slack.com/services/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",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: ${input_parameters.resthook_input} rest hook during on create"
+                },
+                "on_destroy": {
+                  "url": "https://hooks.slack.com/services/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",
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "method": "POST",
+                  "payload": {
+                    "text": "Agostino: rest hook during on destroy "
+                  }
+                },
+                "warning": false,
+                "error": false,
+                "immutable": false,
+                "isErrorFlow": false
+              }
+            },
+            {
+              "resthook": {
+                "title": "resthook_7f6485",
+                "id": "resthookccc8f87f",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "https://hooks.slack.com/services/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",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: rest hook during error flow "
+                },
+                "on_destroy": {
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "method": "POST",
+                  "payload": {
+                    "text": "Agostino: rest hook during error flow - destroy "
+                  }
+                },
+                "warning": false,
+                "error": false,
+                "immutable": false,
+                "isErrorFlow": true
+              }
+            }
+          ],
+          "notifications": [],
+          "sequence": {
+            "0": "resthookee70ad6f",
+            "1": "agoamazo9d9ec813"
+          },
+          "error_sequence": {
+            "0": "resthookccc8f87f"
+          }
+        },
+        "output_parameters": [
+          {
+            "name": "service_instance_name",
+            "label": "Service Instance Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "Service Instance Name",
+            "default": "${svc_instance.name}",
+            "permission": "Read-Only",
+            "action": "Provision"
+          }
+        ]
+      },
+      {
+        "type": "bind",
+        "name": "Bind",
+        "description": "Bind to send mail",
+        "input_parameters": [
+          {
+            "name": "resthook_input",
+            "label": "Resthook input - Bind",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "isDynamic": false,
+            "default": "Test_Bind"
+          }
+        ],
+        "flow": {
+          "conditions": [],
+          "templates": [],
+          "resthooks": [
+            {
+              "resthook": {
+                "title": "resthook_4b7c4f",
+                "id": "resthook08713c72",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "https://hooks.slack.com/services/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",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: rest hook during Bind - on create"
+                },
+                "on_destroy": {
+                  "url": "https://hooks.slack.com/services/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",
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "payload": {
+                    "text": "Agostino: rest hook during  bind - destroy"
+                  },
+                  "method": "POST"
+                },
+                "isErrorFlow": false,
+                "immutable": false
+              }
+            },
+            {
+              "resthook": {
+                "title": "resthook_2a9100",
+                "id": "resthookc514a48b",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "https://hooks.slack.com/services/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",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: rest hook of bind - Error flow"
+                },
+                "immutable": false
+              }
+            }
+          ],
+          "notifications": [],
+          "sequence": {
+            "0": "resthook08713c72"
+          },
+          "error_sequence": {
+            "0": "resthookc514a48b"
+          }
+        },
+        "output_parameters": []
+      }
+    ],
+    "plans": [
+      {
+        "name": "Standard",
+        "description": "To deploy a Standard plan",
+        "actions": [],
+        "plan_parameters": [],
+        "expanded": false
+      }
+    ],
+    "version": "1.0.0.0"
+  }
+}
