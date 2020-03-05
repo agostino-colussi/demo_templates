@@ -1,0 +1,321 @@
+{
+    "terraform_version": ">= 0.11.0",
+	"input_groups": [
+		{
+			"name": "VMwareNSXT",
+			"label": "VMware NSX-T Variables"
+		},
+		{
+            "name": "Networking",
+            "label": "Networking"
+        },
+        {
+            "name": "Instances",
+            "label": "Instances"
+        },
+        {
+            "name": "Other",
+            "label": "Other"
+        }
+	],
+	"template_input_params": [
+		{
+			"name": "nsxt_tag_scope",
+			"group_name": "VMwareNSXT",
+			"type": "string",
+			"default": "AgoProject",
+			"hidden": false,
+			"label": "Tag Scope",
+			"description": "Tag scope is similar to the Key attribute of the tagging mechanism.",
+			"secured": false,
+			"required": false
+		},
+		{
+			"name": "nsxt_tag",
+			"group_name": "VMwareNSXT",			
+			"type": "string",
+			"default": "Ago",
+			"hidden": false,
+			"label": "Tag Value",
+			"description": "Tag value is similar to the value attribute of the tagging mechanism.",
+			"secured": false,
+			"required": false
+		},
+		{
+			"name": "nsxt_transport_zone",
+			"group_name": "VMwareNSXT",			
+			"type": "string",
+			"default": "CAMDC2Zone",
+			"hidden": false,
+			"label": "Tansport Zone Name",
+			"description": "Name of the Transport Zone to be used by the logical switch.",
+			"secured": false,
+			"required": true
+		},
+		{
+			"name": "nsxt_logical_switch_name",
+			"group_name": "VMwareNSXT",			
+			"type": "string",
+			"default": "ago-switch-hybrid",
+			"hidden": false,
+			"label": "Logical Switch Name",
+			"description": "Display Name of the logical switch to create.",
+			"secured": false,
+			"required": true
+		},
+		{
+			"name": "nsxt_logical_switch_desc",
+			"group_name": "VMwareNSXT",			
+			"type": "string",
+			"default": "Logical switch created for hybrid scenario",
+			"hidden": false,
+			"label": "Logical Switch Description",
+			"description": "Description of the logical switch.",
+			"secured": false,
+			"required": false
+		},
+		{
+			"name": "nsxt_logical_switch_state",
+			"group_name": "VMwareNSXT",
+			"type": "string",
+			"hidden": false,
+			"label": "Logical Switch State",
+			"description": "Admin state for the logical switch.",
+			"secured": false,
+			"required": true,
+			"default": "UP",
+			"options": [
+				{
+					"value": "UP",
+					"label": "UP"
+				},
+				{
+					"value": "DOWN",
+					"label": "DOWN"
+				}
+			]
+		},
+		{
+			"name": "nsxt_logical_switch_repl_mode",
+			"group_name": "VMwareNSXT",			
+			"type": "string",
+			"hidden": false,
+			"label": "Replication mode of the Logical Switch",
+			"description": "Replication mode of the Logical Switch.",
+			"secured": false,
+			"required": true,
+			"default": "MTEP",
+			"options": [
+				{
+					"value": "MTEP",
+					"label": "MTEP"
+				},
+				{
+					"value": "SOURCE",
+					"label": "SOURCE"
+				}
+			]			
+		},
+		{
+            "name": "hostname-tag",
+            "label": "hostname-tag",
+            "description": "Hostname of server",
+            "type": "string",
+            "default": "agostino-ec2-hybrid",
+            "validation": "",
+            "group_name": "Other",
+            "required": true,
+            "secured": false,
+            "hidden": false,
+            "immutable": false,
+            "immutable_after_create": false
+        },
+        {
+            "name": "aws_region",
+            "label": "AWS Region Name",
+            "description": "AWS region to launch servers.",
+            "type": "string",
+            "default": "us-east-1",
+            "validation": "",
+            "group_name": "Other",
+            "required": true,
+            "secured": false,
+            "hidden": false,
+            "immutable": false,
+            "immutable_after_create": false,
+            "options": [
+                {
+                    "value": "us-east-1",
+                    "label": "US East (N. Virginia)",
+                    "default": true
+                },
+                {
+                    "value": "us-east-2",
+					"label": "US East (Ohio)"
+				},
+				{
+					"value": "us-west-1",
+					"label": "US West (N. California)"
+				},
+				{
+					"value": "us-west-2",
+					"label": "US West (Oregon)"
+				},
+				{
+					"value": "us-gov-west-1",
+					"label": "US GovCloud Region"
+				},
+				{
+					"value": "ca-central-1",
+					"label": "Canada (Central)"
+				},
+				{
+					"value": "eu-west-1",
+					"label": "EU (Ireland)"
+				},
+				{
+					"value": "eu-central-1",
+					"label": "EU (Frankfurt)"
+				},
+				{
+					"value": "eu-west-2",
+					"label": "EU (London)"
+				},
+				{
+					"value": "ap-northeast-1",
+					"label": "Asia Pacific (Tokyo)"
+				},
+				{
+					"value": "ap-northeast-2",
+					"label": "Asia Pacific (Seoul)"
+				},
+				{
+					"value": "ap-southeast-1",
+					"label": "Asia Pacific (Singapore)"
+				},
+				{
+					"value": "ap-southeast-2",
+					"label": "Asia Pacific (Sydney)"
+				},
+				{
+					"value": "ap-south-1",
+					"label": "Asia Pacific (Mumbai)"
+				},
+				{
+					"value": "sa-east-1",
+					"label": "South America (São Paulo)"
+				}
+			]
+		},
+		{
+			"name": "vpc_name_tag",
+			"label": "Virtual Private Cloud",
+			"description": "Name of the Virtual Private Cloud (VPC) this resource is going to be deployed into",
+			"type": "string",
+			"default": "CAMVPC",
+			"validation": "",
+			"group_name": "Networking",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "subnet_name",
+			"label": "Subnet Name",
+			"description": "Subnet Name",
+			"type": "string",
+			"default": "CAM",
+			"validation": "",
+			"group_name": "Networking",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "aws_image_size",
+			"label": "AWS Image Instance Size",
+			"description": "AWS Image Instance Size",
+			"type": "string",
+			"default": "t2.small",
+			"validation": "",
+			"group_name": "Instances",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "public_ssh_key_name",
+			"label": "Public SSH Key Name",
+			"description": "Name of the public SSH key used to connect to the virtual guest",
+			"type": "string",
+			"default": "agostino-key-hybrid",
+			"validation": "",
+			"group_name": "Other",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "public_ssh_key",
+			"label": "Public SSH Key",
+			"description": "Public SSH key used to connect to the virtual guest",
+			"type": "string",
+			"default": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAz4hbVIhqP67mEa1vm4+bHoneLQX5aGUv85TN81Un7IvQxZBpVM2QDjwNAvh7G51dwYCDg84LnahW35SsuYf2phYVYlC4w1cR2C8cq1tJnas7S2abRS6jS5AXGLJ13GPaqi0ikctxMep0LmdRXk+6QG/5HuiuOA+9Mii1VieDuVgxJhk7nS3YgP9MpTSPKug4HC3PIhzOrBYKsn4K5Oq/85KydzRwdL7cT+znC3jieWME3llrcNMBP8axk0bt5FhjqYnb9y/6kVne/V+bxuXPzIJPBnc8BiLpP0cjS2xcKMRySx7lfjSYEzB2ZJaRwj9Ymc7p4PsBLpTJCdiG5JomBFxh3ouy/+5MwjBTM4AF8v+QxbGmQLaVXxkpuwb/vWEPbqQQnHIL6WN9vIQT1zPV8Ef+69v37TvEfznk5CkSCQTXYZwJVpcgDZCpyzLs84uMRIrw6KO6SuSrvcKpQ/C7XhMVKy95lfbbwyXzLWIXIsexvZXWXPoKAhjiIkaW21F+zUdUl7Y83uLpqAMrBqOgfouy6DgOArufRDyp4vl0zXe48my34VeBVahWdO+PrJklm2AjXzTK9iNWVc3YlGFClqwZgrut1i74F/Lqb23Lx2yjIom7xnUtg7lP4l9j4LKFe7ClwFpoStMOg7twcD5WjUQuQcs/TPRJNBpzcf3xaps= agostino.colussi@it.ibm.com",
+			"validation": "",
+			"group_name": "Other",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "aws_image",
+			"label": "Operating System ID",
+			"description": "Operating system image id / template that should be used when creating the virtual image",
+			"type": "string",
+			"default": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+			"validation": "",
+			"group_name": "Other",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		},
+		{
+			"name": "aws_ami_owner_id",
+			"label": "AWS AMI Owner ID",
+			"description": "AWS AMI Owner ID",
+			"type": "string",
+			"default": "099720109477",
+			"validation": "",
+			"group_name": "Other",
+			"required": true,
+			"secured": false,
+			"hidden": false,
+			"immutable": false,
+			"immutable_after_create": false
+		}
+	],
+    "template_output_params": [  
+		{
+			"name": "public_ip",
+			"label": "Public Ip",
+			"description": "Public Ip",
+			"group_name": "",
+			"secured": false,
+			"hidden": false,
+			"shortname": "",
+			"type": "string"
+		} 
+	]
+}
