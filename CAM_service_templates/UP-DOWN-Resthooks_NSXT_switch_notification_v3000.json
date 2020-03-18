@@ -1,0 +1,554 @@
+{
+  "service": {
+    "specVersion": "v3",
+    "catalog_metadata": {
+      "name": "UP-DOWN-Resthooks_NSX-T_switch_notifications",
+      "description": "Rest hooks - NSX-T logical switch, notifications and binding ",
+      "image": "serviceicon_1.svg",
+      "category": "Agostino",
+      "bullets": [
+        {
+          "title": "Cloud Provider",
+          "description": "VMware NSX-T"
+        }
+      ],
+      "providerDisplayName": "IBM",
+      "longDescription": "Rest hooks - NSX-T logical switch, notifications and binding ",
+      "documentationUrl": "",
+      "supportUrl": "",
+      "bindable": true,
+      "updatable": "",
+      "author": "camuser2@localtest.com",
+      "systemTags": false
+    },
+    "tags": [],
+    "actions": [
+      {
+        "type": "provision",
+        "name": "Provision",
+        "description": "Default action for deployment of service",
+        "input_parameters": [
+          {
+            "name": "resthook_input",
+            "label": "Input for resthook",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Input for resthook",
+            "default": "Test",
+            "editable": true
+          },
+          {
+            "name": "switch_name",
+            "label": "Switch Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Switch Name",
+            "default": "ago-switch",
+            "editable": true
+          },
+          {
+            "name": "zone_name",
+            "label": "Zone Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Zone Name",
+            "default": "CAMDC2Zone",
+            "editable": true
+          },
+          {
+            "name": "mail_address",
+            "label": "Mail Address",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "isDynamic": false,
+            "editable": false,
+            "default": "agostino.colussi@it.ibm.com",
+            "passbyname": false,
+            "dynamicDetails": {}
+          },
+          {
+            "name": "resthook_url",
+            "label": "Resthook URL",
+            "customtype": "sharedparameter",
+            "type": "sharedparameter",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Resthook URL",
+            "isDynamic": false,
+            "editable": true,
+            "default": "",
+            "datatype": "resthook_config",
+            "passbyname": false,
+            "dynamicDetails": {}
+          },
+          {
+            "name": "mail_input",
+            "label": "Mail input",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "isDynamic": false,
+            "editable": true,
+            "default": "Test mail input"
+          }
+        ],
+        "flow": {
+          "conditions": [],
+          "templates": [
+            {
+              "VMware NSX-T Sample to create a logical switch": {
+                "title": "VMware NSX-T Sample to create a logical switch_3f70ca",
+                "template_name": "VMware NSX-T Sample to create a logical switch",
+                "version": "2.3",
+                "id": "vmwarens2a0c7cf1",
+                "template_type": "Terraform",
+                "template_content_type": "VMware NSX-T",
+                "template_provider": "VMware NSX-T",
+                "instance_name": "",
+                "cloud_connection_name": "NSX-T_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "nsxt_tag_scope": "AgoProject",
+                  "nsxt_tag": "Ago",
+                  "nsxt_transport_zone": "${input_parameters.zone_name}",
+                  "nsxt_logical_switch_name": "${input_parameters.switch_name}",
+                  "nsxt_logical_switch_desc": "Logical switch created by Agostino",
+                  "nsxt_logical_switch_state": "UP",
+                  "nsxt_logical_switch_repl_mode": "MTEP"
+                },
+                "outputs": [],
+                "warning": false,
+                "error": false,
+                "isErrorFlow": false,
+                "editable": true,
+                "provider_engine_version": "0.11.11"
+              }
+            },
+            {
+              "VMware NSX-T Sample to create a logical switch": {
+                "title": "VMware NSX-T Sample to create a logical switch_b5a730",
+                "template_name": "VMware NSX-T Sample to create a logical switch",
+                "version": "2.3",
+                "id": "vmwarensed6dba3b",
+                "template_type": "Terraform",
+                "template_content_type": "VMware NSX-T",
+                "template_provider": "VMware NSX-T",
+                "instance_name": "",
+                "cloud_connection_name": "NSX-T_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "nsxt_tag_scope": "AgoProject",
+                  "nsxt_tag": "Ago",
+                  "nsxt_transport_zone": "CAMDC2Zone",
+                  "nsxt_logical_switch_name": "${input_parameters.switch_name}_onerror",
+                  "nsxt_logical_switch_desc": "Logical switch created during error flow exec",
+                  "nsxt_logical_switch_state": "UP",
+                  "nsxt_logical_switch_repl_mode": "MTEP"
+                },
+                "outputs": [],
+                "warning": false,
+                "error": false,
+                "isErrorFlow": true,
+                "editable": true,
+                "provider_engine_version": "0.11.11"
+              }
+            }
+          ],
+          "resthooks": [
+            {
+              "resthook": {
+                "title": "resthook_168fc0",
+                "id": "resthookee70ad6f",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "${datatypes.resthook_config.resthook_url}",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: ${input_parameters.resthook_input} rest hook during on create"
+                },
+                "on_destroy": {
+                  "url": "${datatypes.resthook_config.resthook_url}",
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "method": "POST",
+                  "payload": {
+                    "text": "Agostino: rest hook during on destroy "
+                  }
+                },
+                "warning": false,
+                "error": false,
+                "isErrorFlow": false,
+                "editable": true
+              }
+            },
+            {
+              "resthook": {
+                "title": "resthook_7f6485",
+                "id": "resthookccc8f87f",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "${datatypes.resthook_config.resthook_url}",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: rest hook during error flow "
+                },
+                "on_destroy": {
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "method": "POST",
+                  "payload": {
+                    "text": "Agostino: rest hook during error flow - destroy "
+                  }
+                },
+                "warning": false,
+                "error": false,
+                "isErrorFlow": true,
+                "editable": true
+              }
+            }
+          ],
+          "notifications": [
+            {
+              "emailnotification": {
+                "title": "emailnotification_e4a855",
+                "type": "email",
+                "receiverList": "${input_parameters.mail_address}",
+                "id": "emailnotbc9a875d",
+                "sender": "CAMadmin",
+                "copyToList": "",
+                "subject": "PROVISION: Service deploy ${svc_instance.name} succeeded",
+                "body": "Mail input string: \n${input_parameters.mail_input}\n-------------------------------------------------------------\n\nService instance name: \n${svc_instance.name}\n----------------------------------------------------------------------\n\nProvisioning - resthook\n\n----------------------------------------------------------------------\nResthook payload:\n${resthooks.resthookee70ad6f.payload}\n----------------------------------------------------------------------\nResthook status:\n${resthooks.resthookee70ad6f.status}\n----------------------------------------------------------------------\nResponse body, JSON object\n${resthooks.resthookee70ad6f.body}\n----------------------------------------------------------------------\nhttp status code. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_code} \n----------------------------------------------------------------------\nhttp status. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_message}\n----------------------------------------------------------------------\nResthook Headers:\n${resthooks.resthookee70ad6f.headers.Content-Type}\n----------------------------------------------------------------------\n\nProvision Template\n\nTemplate Status: ${templates.vmwarens2a0c7cf1.status}\n\n----------------------------------------------------------------------\nLogical Switch Name:\n${templates.vmwarens2a0c7cf1.nsxt_logical_switch_name}",
+                "editable": true,
+                "on_update_create": true,
+                "on_update": {
+                  "receiverList": "${input_parameters.mail_address}",
+                  "copyToList": "",
+                  "subject": "Notify update of ${svc_instance.name} instance",
+                  "body": "Mail input string: \n${input_parameters.mail_input}\n-------------------------------------------------------------\n\nService instance name: \n${svc_instance.name} updated\n------------------------------------------------------------\n\nOn update -       resthook\n\n----------------------------------------------------------------------\nResthook payload:\n${resthooks.resthookee70ad6f.payload}\n----------------------------------------------------------------------\nResthook status:\n${resthooks.resthookee70ad6f.status}\n----------------------------------------------------------------------\nResponse body, JSON object\n${resthooks.resthookee70ad6f.body}\n----------------------------------------------------------------------\nhttp status code. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_code} \n----------------------------------------------------------------------\nhttp status. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_message}\n----------------------------------------------------------------------\nResthook Headers:\n${resthooks.resthookee70ad6f.headers.Content-Type}\n----------------------------------------------------------------------\n\nProvision Template\n\nTemplate Status: ${templates.vmwarens2a0c7cf1.status}\n\n----------------------------------------------------------------------\nLogical Switch Name:\n${templates.vmwarens2a0c7cf1.nsxt_logical_switch_name}"
+                },
+                "on_destroy": {
+                  "receiverList": "${input_parameters.mail_address}",
+                  "copyToList": "",
+                  "subject": "Notify destroy of ${svc_instance.name} instance",
+                  "body": "Mail input string: \n${input_parameters.mail_input}\n-------------------------------------------------------------\n\nService instance name: \n${svc_instance.name} destroyed\n------------------------------------------------------------\n\nOn destroy -       resthook\n\n----------------------------------------------------------------------\nResthook payload:\n${resthooks.resthookee70ad6f.payload}\n----------------------------------------------------------------------\nResthook status:\n${resthooks.resthookee70ad6f.status}\n----------------------------------------------------------------------\nResponse body, JSON object\n${resthooks.resthookee70ad6f.body}\n----------------------------------------------------------------------\nhttp status code. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_code} \n----------------------------------------------------------------------\nhttp status. For example, 200 OK:\n${resthooks.resthookee70ad6f.status_message}\n----------------------------------------------------------------------\nResthook Headers:\n${resthooks.resthookee70ad6f.headers.Content-Type}\n----------------------------------------------------------------------\n\nProvision Template\n\nTemplate Status: ${templates.vmwarens2a0c7cf1.status}\n\n----------------------------------------------------------------------\nLogical Switch Name:\n${templates.vmwarens2a0c7cf1.nsxt_logical_switch_name}"
+                }
+              }
+            },
+            {
+              "emailnotification": {
+                "title": "emailnotification_c6732a",
+                "type": "email",
+                "receiverList": "agostino.colussi@it.ibm.com",
+                "id": "emailnot24844347",
+                "sender": "CAMadmin",
+                "copyToList": "",
+                "subject": "PROVISION: Service deploy ${svc_instance.name} failed",
+                "body": "Deployment result details:\n--------------------------\n\nOn Error Parameters\n\n----------------------------------------------------------------------\nError message for failure: \n${svc_instance.error.message}\n----------------------------------------------------------------------\nActivity id of the failed activity: \n${svc_instance.error.activity_id}\n----------------------------------------------------------------------\nType of failed activity: \n${svc_instance.error.activity_type}\n----------------------------------------------------------------------\nCreation time of the failed activity: \n${svc_instance.error.created_at}\n----------------------------------------------------------------------\n\nOther Parameters\n\n----------------------------------------------------------------------\nService instance name: \n${svc_instance.name}\n----------------------------------------------------------------------\n\nPrimary - Resthook\n\n----------------------------------------------------------------------\nResthook payload:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.payload}\n----------------------------------------------------------------------\nResthook status:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.status}\n----------------------------------------------------------------------\nResponse body, JSON object\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.body}\n----------------------------------------------------------------------\nhttp status code. For example, 200 OK:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.status_code} \n----------------------------------------------------------------------\nhttp status. For example, 200 OK:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.status_message}\n----------------------------------------------------------------------\nResthook Headers:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.headers.Content-Type}\n----------------------------------------------------------------------\nResthook Authentication Type:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.authentication.type}\n----------------------------------------------------------------------\nResthook Authentication User:\n${svc_instance.primaryflow.resthooks.resthookee70ad6f.authentication.username} \n----------------------------------------------------------------------\n\nPrimary - template\n\n----------------------------------------------------------------------\nDeployed template name: \n${svc_instance.primaryflow.templates.vmwarens2a0c7cf1.template_name}\n----------------------------------------------------------------------\nDeployment result \n${svc_instance.primaryflow.templates.vmwarens2a0c7cf1.status}\n----------------------------------------------------------------------\nTemplate instance name: \n${svc_instance.primaryflow.templates.vmwarens2a0c7cf1.instance_name}\n----------------------------------------------------------------------\n\n\nOn Error flow - resthook\n\n----------------------------------------------------------------------\nResthook payload:\n${resthooks.resthookccc8f87f.status}\n----------------------------------------------------------------------\nResthook status:\n${resthooks.resthookccc8f87f.status}\n----------------------------------------------------------------------\nResponse body, JSON object\n${resthooks.resthookccc8f87f.body}\n----------------------------------------------------------------------\nhttp status code. For example, 200 OK:\n${resthooks.resthookccc8f87f.status_code} \n----------------------------------------------------------------------\nhttp status. For example, 200 OK:\n${resthooks.resthookccc8f87f.status_message}\n----------------------------------------------------------------------\nResthook Headers:\n${resthooks.resthookccc8f87f.headers.Content-Type}\n----------------------------------------------------------------------\nResthook Authentication Type:\nNot accepted\n----------------------------------------------------------------------\nResthook Authentication User:\nNot accepted\n----------------------------------------------------------------------\n\nOn Error flow - template\n\n----------------------------------------------------------------------\nDeployed template name: \n${templates.vmwarensed6dba3b.template_name}\n----------------------------------------------------------------------\nDeployment result \n${templates.vmwarensed6dba3b.status}\n----------------------------------------------------------------------\nTemplate instance name: \n${templates.vmwarensed6dba3b.instance_name}",
+                "warning": false,
+                "error": false,
+                "editable": true
+              }
+            }
+          ],
+          "sequence": {
+            "0": "resthookee70ad6f",
+            "1": "vmwarens2a0c7cf1",
+            "2": "emailnotbc9a875d"
+          },
+          "error_sequence": {
+            "0": "resthookccc8f87f",
+            "1": "vmwarensed6dba3b",
+            "2": "emailnot24844347"
+          }
+        },
+        "output_parameters": [
+          {
+            "name": "service_instance_name",
+            "label": "Service Instance Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "Service Instance Name",
+            "default": "${svc_instance.name}",
+            "permission": "Read-Only",
+            "action": "Provision"
+          },
+          {
+            "name": "deployed_template_name",
+            "label": "Deployed template name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "Deployed template name",
+            "default": "${templates.vmwarens2a0c7cf1.template_name}",
+            "permission": "Read-Only",
+            "action": "Provision"
+          },
+          {
+            "name": "deployment_result",
+            "label": "Deployment result",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "Deployment result",
+            "default": "${templates.vmwarens2a0c7cf1.status}",
+            "permission": "Read-Only",
+            "action": "Provision"
+          },
+          {
+            "name": "template_instance_name",
+            "label": "Template instance name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": true,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "Template instance name",
+            "default": "${templates.vmwarens2a0c7cf1.instance_name}",
+            "permission": "Read-Only",
+            "action": "Provision"
+          }
+        ]
+      },
+      {
+        "type": "bind",
+        "name": "Bind",
+        "description": "Bind to send mail",
+        "input_parameters": [
+          {
+            "name": "switch_name",
+            "label": "Switch Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "",
+            "default": "ago-switch-bind",
+            "editable": true
+          },
+          {
+            "name": "zone_name",
+            "label": "Zone Name",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Zone Name",
+            "default": "CAMDC2Zone",
+            "editable": true
+          },
+          {
+            "name": "resthook_input",
+            "label": "Resthook Input",
+            "customtype": "string",
+            "type": "string",
+            "immutable": false,
+            "hidden": false,
+            "required": false,
+            "secured": false,
+            "description": "",
+            "isDynamic": false,
+            "editable": true,
+            "default": "Test BIND"
+          },
+          {
+            "name": "resthook_url",
+            "label": "Resthook URL",
+            "customtype": "sharedparameter",
+            "type": "sharedparameter",
+            "immutable": false,
+            "hidden": false,
+            "required": true,
+            "secured": false,
+            "description": "Resthook URL",
+            "isDynamic": false,
+            "editable": true,
+            "default": "ResthookCorrectURL",
+            "datatype": "resthook_config"
+          }
+        ],
+        "flow": {
+          "conditions": [],
+          "templates": [
+            {
+              "VMware NSX-T Sample to create a logical switch": {
+                "title": "VMware NSX-T Sample to create a logical switch_22d0d9",
+                "template_name": "VMware NSX-T Sample to create a logical switch",
+                "version": "2.3",
+                "id": "vmwarens199844b3",
+                "template_type": "Terraform",
+                "template_content_type": "VMware NSX-T",
+                "template_provider": "VMware NSX-T",
+                "instance_name": "",
+                "cloud_connection_name": "NSX-T_ago",
+                "template_data_objects": {},
+                "template_params": {
+                  "nsxt_tag_scope": "Ago_Project",
+                  "nsxt_tag": "Ago",
+                  "nsxt_transport_zone": "${input_parameters.zone_name}",
+                  "nsxt_logical_switch_name": "${input_parameters.switch_name}",
+                  "nsxt_logical_switch_desc": "Ago Bind switch",
+                  "nsxt_logical_switch_state": "UP",
+                  "nsxt_logical_switch_repl_mode": "MTEP"
+                },
+                "outputs": [],
+                "isErrorFlow": false,
+                "editable": true,
+                "provider_engine_version": "0.11.11"
+              }
+            }
+          ],
+          "resthooks": [
+            {
+              "resthook": {
+                "title": "resthook_4b7c4f",
+                "id": "resthook08713c72",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "${datatypes.resthook_config.resthook_url}",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: ${input_parameters.resthook_input} rest hook during Bind - on create"
+                },
+                "on_destroy": {
+                  "url": "${datatypes.resthook_config.resthook_url}",
+                  "headers": {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                  },
+                  "payload": {
+                    "text": "Agostino: ${input_parameters.resthook_input} rest hook during  bind - destroy"
+                  },
+                  "method": "POST"
+                },
+                "isErrorFlow": false,
+                "editable": true
+              }
+            },
+            {
+              "resthook": {
+                "title": "resthook_2a9100",
+                "id": "resthookc514a48b",
+                "headers": {
+                  "accept": "application/json",
+                  "Content-Type": "application/json"
+                },
+                "url": "${datatypes.resthook_config.resthook_url}",
+                "method": "POST",
+                "payload": {
+                  "text": "Agostino: rest hook of bind - Error flow"
+                },
+                "editable": true
+              }
+            }
+          ],
+          "notifications": [
+            {
+              "emailnotification": {
+                "title": "emailnotification_87efce",
+                "type": "email",
+                "receiverList": "agostino.colussi@it.ibm.com",
+                "id": "emailnot409c502e",
+                "sender": "CAMadmin",
+                "copyToList": "",
+                "subject": "Service deployment details",
+                "body": "Deployment result details\n----------------------------------------\nService instance name: ${svc_instance.output_parameters.service_instance_name}\n\nDeployed template name: ${svc_instance.output_parameters.deployed_template_name}\n\nTemplate instance name: ${svc_instance.output_parameters.template_instance_name}\n \nDeployment result ${svc_instance.output_parameters.deployment_result}",
+                "immutable": false
+              }
+            },
+            {
+              "emailnotification": {
+                "title": "emailnotification_11bc73",
+                "type": "email",
+                "receiverList": "agostino.colussi@it.ibm.com",
+                "id": "emailnotfdc55916",
+                "sender": "CAMadmin",
+                "copyToList": "",
+                "subject": "Bind in Error",
+                "body": "On Error Parameters\n\n----------------------------------------------------------------------\nError message for failure: \n${svc_instance.error.message}\n----------------------------------------------------------------------\nActivity id of the failed activity: \n${svc_instance.error.activity_id}\n----------------------------------------------------------------------\nType of failed activity: \n${svc_instance.error.activity_type}\n----------------------------------------------------------------------\nCreation time of the failed activity: \n${svc_instance.error.created_at}\n----------------------------------------------------------------------"
+              }
+            }
+          ],
+          "sequence": {
+            "0": "resthook08713c72",
+            "1": "vmwarens199844b3",
+            "2": "emailnot409c502e"
+          },
+          "error_sequence": {
+            "0": "resthookc514a48b",
+            "1": "emailnotfdc55916"
+          }
+        },
+        "output_parameters": []
+      }
+    ],
+    "plans": [
+      {
+        "name": "Standard",
+        "description": "To deploy a Standard plan",
+        "actions": [],
+        "plan_parameters": [],
+        "expanded": false
+      }
+    ],
+    "version": "3.0.0.0",
+    "upgrade_from": [
+      {
+        "version": "1.0.0.0"
+      },
+      {
+        "version": "2.0.0.0"
+      }
+    ],
+    "downgrade_to": [
+      {
+        "version": "2.0.0.0"
+      }
+    ]
+  }
+}
